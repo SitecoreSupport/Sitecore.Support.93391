@@ -20,12 +20,12 @@
 
         protected override string GetMediaPath()
         {
-            string rawUrl = Context.RawUrl;
-            if (WebUtil.Is404Request(rawUrl))
+            string absolutePath = HttpContext.Current.Request.Url.AbsolutePath;
+            if (WebUtil.Is404Request(absolutePath))
             {
-                rawUrl = WebUtil.GetRequestUri404(rawUrl);
+                absolutePath = WebUtil.GetRequestUri404(absolutePath);
             }
-            string localPath = WebUtil.GetLocalPath(rawUrl);
+            string localPath = WebUtil.GetLocalPath(absolutePath);
             return this.GetMediaPath(localPath);
         }
     }
